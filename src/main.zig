@@ -1,6 +1,7 @@
 const std = @import("std");
 const Operation = @import("operations/op.zig").Operation;
 const list = @import("operations/list.zig").list;
+const dedup = @import("operations/dedup.zig").dedup;
 
 pub fn main() !void {
     var gpa = std.heap.ArenaAllocator.init(std.heap.page_allocator);
@@ -27,7 +28,7 @@ pub fn main() !void {
         },
         .dedup => {
             const path = args.next() orelse return error.ExpectedPathForDedup;
-            _ = path;
+            try dedup(alloc, path);
         },
     }
 }
